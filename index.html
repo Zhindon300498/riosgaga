@@ -4,109 +4,111 @@
 <meta charset="UTF-8">
 <title>Un mensaje para ti</title>
 <style>
-body {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    overflow: hidden;
+body{
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  overflow:hidden;
 }
 
-h1 {
-    white-space: pre-wrap;
-    font-size: 2rem;
-    max-width: 80%;
-    transition: opacity 0.5s ease;
+h1{
+  white-space:pre-wrap;
+  font-size:2rem;
+  max-width:80%;
+  transition:opacity .5s ease;
 }
 
-button {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: white;
-    color: #ff4f81;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#fff;
+  color:#ff4f81;
+  font-size:16px;
+  cursor:pointer;
+  transition:transform .2s ease;
 }
 
-button:hover {
-    transform: scale(1.1);
-}
+button:hover{ transform:scale(1.05); }
 </style>
 </head>
 <body>
 
-<h1 id="mensaje">Has visto lo que puedo hacer para llamar tu atencion...</h1>
-<button onclick="cambiarTexto()">Sigue leyendo y no me dejes en visto (como siempre) </button>
+<h1 id="mensaje"></h1>
+<button id="btn" onclick="cambiarTexto()">Sigue leyendo y no me dejes en visto (como siempre)</button>
 
 <script>
-let mensajes = [
-"Lo haría mil veces más solo para llamar tu atención.",
-"Y eso que todavía no me he puesto creativo...",
-"Imagínate lo que haría si me dieras una cita 😉"
+const mensajes = [
+  "Has visto lo que puedo hacer para llamar tu atención...",
+  "Lo haría mil veces más solo para llamar tu atención.",
+  "Y eso que todavía no me he puesto creativo...",
+  "Imagínate lo que haría si me dieras una cita 😉"
 ];
 
 let index = 0;
 let escribiendo = false;
 
-function escribirTexto(texto, callback) {
-    let i = 0;
-    let velocidad = 40;
-    let elemento = document.getElementById("mensaje");
-    elemento.innerText = "";
-    escribiendo = true;
+function escribirTexto(texto, callback){
+  let i = 0;
+  const velocidad = 40;
+  const elemento = document.getElementById("mensaje");
+  elemento.textContent = "";
+  escribiendo = true;
 
-    function escribir() {
-        if (i < texto.length) {
-            elemento.innerText += texto.charAt(i);
-            i++;
-            setTimeout(escribir, velocidad);
-        } else {
-            escribiendo = false;
-            if (callback) callback();
-        }
+  function escribir(){
+    if(i < texto.length){
+      elemento.textContent += texto[i];
+      i++;
+      setTimeout(escribir, velocidad);
+    }else{
+      escribiendo = false;
+      if(callback) callback();
     }
-    escribir();
+  }
+  escribir();
 }
 
-function cambiarTexto() {
-    if (escribiendo) return;
+function cambiarTexto(){
+  if(escribiendo) return;
 
-    if (index < mensajes.length) {
-        escribirTexto(mensajes[index]);
-        index++;
-    } else {
-        iniciarCuentaAtras();
-    }
+  index++;
+  if(index < mensajes.length){
+    escribirTexto(mensajes[index]);
+  }else{
+    iniciarCuentaAtras();
+  }
 }
 
-function iniciarCuentaAtras() {
-    let elemento = document.getElementById("mensaje");
-    let contador = 3;
+function iniciarCuentaAtras(){
+  const elemento = document.getElementById("mensaje");
+  let contador = 3;
 
-    function cuenta() {
-        if (contador > 0) {
-            elemento.innerText = contador + "...";
-            contador--;
-            setTimeout(cuenta, 800);
-        } else {
-            escribirTexto("Vale… ahora dime que no te he sacado una sonrisa 😌");
-        }
+  function cuenta(){
+    if(contador > 0){
+      elemento.textContent = contador + "...";
+      contador--;
+      setTimeout(cuenta, 800);
+    }else{
+      escribirTexto("Vale… ahora dime que no te he sacado una sonrisa 😌");
+      document.getElementById("btn").textContent = "Fin 😌";
+      document.getElementById("btn").disabled = true;
+      document.getElementById("btn").style.opacity = "0.7";
+      document.getElementById("btn").style.cursor = "default";
     }
-
-    cuenta();
+  }
+  cuenta();
 }
+
+// Arranca con efecto escribir al cargar
+escribirTexto(mensajes[index]);
 </script>
 
 </body>
 </html>
-
-
-
