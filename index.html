@@ -49,21 +49,61 @@ button:hover {
 let mensajes = [
 "Lo haría mil veces más solo para llamar tu atención.",
 "Y eso que todavía no me he puesto creativo...",
-"Imagínate lo que haría si me dieras una cita 😉",
-"Vale… ahora dime que al menos te he sacado una sonrisa."
+"Imagínate lo que haría si me dieras una cita 😉"
 ];
 
 let index = 0;
+let escribiendo = false;
+
+function escribirTexto(texto, callback) {
+    let i = 0;
+    let velocidad = 40;
+    let elemento = document.getElementById("mensaje");
+    elemento.innerText = "";
+    escribiendo = true;
+
+    function escribir() {
+        if (i < texto.length) {
+            elemento.innerText += texto.charAt(i);
+            i++;
+            setTimeout(escribir, velocidad);
+        } else {
+            escribiendo = false;
+            if (callback) callback();
+        }
+    }
+    escribir();
+}
 
 function cambiarTexto() {
+    if (escribiendo) return;
+
     if (index < mensajes.length) {
-        document.getElementById("mensaje").innerText = mensajes[index];
+        escribirTexto(mensajes[index]);
         index++;
     } else {
-        document.getElementById("mensaje").innerText = "Ahora te toca responderme 😌";
+        iniciarCuentaAtras();
     }
+}
+
+function iniciarCuentaAtras() {
+    let elemento = document.getElementById("mensaje");
+    let contador = 3;
+
+    function cuenta() {
+        if (contador > 0) {
+            elemento.innerText = contador + "...";
+            contador--;
+            setTimeout(cuenta, 800);
+        } else {
+            escribirTexto("Vale… ahora dime que no te he sacado una sonrisa 😌");
+        }
+    }
+
+    cuenta();
 }
 </script>
 
 </body>
 </html>
+
