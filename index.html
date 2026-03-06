@@ -5,38 +5,47 @@
 <title>Un mensaje para ti</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
+  margin:0;
   background: linear-gradient(135deg,#ff758c,#ff7eb3);
   color:#fff;
   font-family:Arial,sans-serif;
-  text-align:center;
-  height:100vh;
+}
+
+.contenedor{
+  min-height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  overflow:hidden;
+  text-align:center;
+  padding:30px 20px;
 }
 
 h1{
   white-space:pre-wrap;
-  font-size:2rem;
+  font-size:2rem;   /* MISMO tamaño que tenías */
   max-width:80%;
   margin-bottom:20px;
 }
 
 img{
-  width:220px;
+  width:420px;
+  max-width:90vw;
   margin-top:20px;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  border-radius:18px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.35);
 }
 
 button{
   margin-top:25px;
-  padding:12px 25px;
+  padding:14px 28px;
   border:none;
-  border-radius:25px;
+  border-radius:30px;
   background:#fff;
   color:#ff4f81;
   font-size:16px;
@@ -47,17 +56,34 @@ button{
 button:hover{
   transform:scale(1.05);
 }
+
+@media (max-width:768px){
+
+  .contenedor{
+    padding:25px 18px 40px;
+  }
+
+  img{
+    width:85vw;
+    max-width:420px;
+  }
+
+}
+
+button:hover{
+  transform:scale(1.05);
+}
 </style>
 </head>
 
 <body>
-
+<div class="contenedor">
 <h1 id="mensaje"></h1>
 
 <img id="freyja" src="freyja.jpeg" style="display:none;">
 <img id="pato" src="pato.png" style="display:none;">
 
-<button id="btn" onclick="cambiarTexto()">Sigue leyendo</button>
+<button id="btn" onclick="cambiarTexto()">Sigue leyendo(No pases de mi,como siempre..)</button>
 
 <script>
 const mensajes = [
@@ -126,5 +152,6 @@ escribirTexto(mensajes[index]);
 
 </body>
 </html>
+
 
 
