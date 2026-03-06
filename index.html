@@ -5,7 +5,6 @@
 <title>Un mensaje para ti</title>
 
 <style>
-
 body{
   background: linear-gradient(135deg,#ff758c,#ff7eb3);
   color:#fff;
@@ -47,7 +46,6 @@ button{
 button:hover{
   transform:scale(1.05);
 }
-
 </style>
 </head>
 
@@ -60,84 +58,57 @@ button:hover{
 <button id="btn" onclick="cambiarTexto()">Sigue leyendo</button>
 
 <script>
-
 const mensajes = [
-
-"Solo tengo algo que decirte... eres Freyja.",
-
-"Freyja es la diosa nórdica del amor, la magia y la guerra.",
-
-"Era increíblemente bella, pero también peligrosa.",
-
-"Tenía una mezcla rara: sensualidad, poder y misterio.",
-
-"Y ahora dime… ¿cómo se supone que uno no va a fijarse en alguien así?",
-  
-"Asique dime, cuando vengas… ¿podemos ir a cenar?"
-
+  "Solo tengo algo que decirte... eres Freyja.",
+  "Freyja es la diosa nórdica del amor, la magia y la guerra.",
+  "Era increíblemente bella, pero también peligrosa.",
+  "Tenía una mezcla rara: sensualidad, poder y misterio.",
+  "Y ahora dime… ¿cómo se supone que uno no va a fijarse en alguien así?",
+  "Asique dime, cuando vengas… ¿podemos ir a cenar?"
 ];
 
 let index = 0;
 let escribiendo = false;
 
 function escribirTexto(texto){
-
   let i = 0;
   const velocidad = 40;
-
   const elemento = document.getElementById("mensaje");
 
   elemento.textContent = "";
   escribiendo = true;
 
   function escribir(){
-
     if(i < texto.length){
-
       elemento.textContent += texto[i];
       i++;
-
       setTimeout(escribir, velocidad);
-
     }else{
-
       escribiendo = false;
-
     }
-
   }
 
   escribir();
-
 }
 
 function cambiarTexto(){
-
   if(escribiendo) return;
 
   index++;
 
- if(index < mensajes.length){
+  if(index < mensajes.length){
+    escribirTexto(mensajes[index]);
 
-  escribirTexto(mensajes[index]);
-
-  if(index === mensajes.length - 1){
+    if(index === mensajes.length - 1){
       document.getElementById("imagen").style.display = "block";
-  }
-
- }else{
-
+    }
+  }else{
     document.getElementById("btn").style.display = "none";
-
   }
-
 }
 
 escribirTexto(mensajes[index]);
-
 </script>
 
 </body>
 </html>
-
-
