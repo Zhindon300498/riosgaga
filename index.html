@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Un mensaje para ti</title>
 
 <style>
@@ -28,17 +29,17 @@ body{
 
 h1{
   white-space:pre-wrap;
-  font-size:2rem;   /* MISMO tamaño que tenías */
+  font-size:2rem;
   max-width:80%;
   margin-bottom:20px;
 }
 
 img{
-  width:420px;
-  max-width:90vw;
+  width:520px;
+  max-width:92vw;
   margin-top:20px;
-  border-radius:18px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.35);
+  border-radius:20px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.35);
 }
 
 button{
@@ -58,32 +59,27 @@ button:hover{
 }
 
 @media (max-width:768px){
-
   .contenedor{
     padding:25px 18px 40px;
   }
 
   img{
-    width:85vw;
-    max-width:420px;
+    width:92vw;
+    max-width:520px;
   }
-
-}
-
-button:hover{
-  transform:scale(1.05);
 }
 </style>
 </head>
 
 <body>
 <div class="contenedor">
-<h1 id="mensaje"></h1>
+  <h1 id="mensaje"></h1>
 
-<img id="freyja" src="freyja.jpeg" style="display:none;">
-<img id="pato" src="pato.png" style="display:none;">
+  <img id="freyja" src="freyja.jpeg" style="display:none;">
+  <img id="pato" src="pato.png" style="display:none;">
 
-<button id="btn" onclick="cambiarTexto()">Sigue leyendo(No pases de mi,como siempre..)</button>
+  <button id="btn" onclick="cambiarTexto()">Sigue leyendo(No pases de mi,como siempre..)</button>
+</div>
 
 <script>
 const mensajes = [
@@ -127,23 +123,22 @@ function cambiarTexto(){
   if(index < mensajes.length){
     escribirTexto(mensajes[index]);
 
-    // Ocultar ambas imágenes por defecto
     document.getElementById("freyja").style.display = "none";
     document.getElementById("pato").style.display = "none";
 
-    // Mostrar la foto de ella después de la frase 5
     if(index === 4){
       document.getElementById("freyja").style.display = "block";
     }
 
-    // Mostrar el pato en la frase final
     if(index === 5){
       document.getElementById("freyja").style.display = "none";
       document.getElementById("pato").style.display = "block";
     }
 
   }else{
-    document.getElementById("btn").style.display = "none";
+    const btn = document.getElementById("btn");
+    btn.textContent = "Espero que te haya gustado 🖤";
+    btn.onclick = null;
   }
 }
 
@@ -152,6 +147,3 @@ escribirTexto(mensajes[index]);
 
 </body>
 </html>
-
-
-
