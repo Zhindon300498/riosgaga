@@ -22,6 +22,7 @@ h1{
   white-space:pre-wrap;
   font-size:2rem;
   max-width:80%;
+  margin-bottom:20px;
 }
 
 img{
@@ -53,7 +54,8 @@ button:hover{
 
 <h1 id="mensaje"></h1>
 
-<img id="imagen" src="pato.png" style="display:none;">
+<img id="freyja" src="freyja.jpg" style="display:none;">
+<img id="pato" src="pato.png" style="display:none;">
 
 <button id="btn" onclick="cambiarTexto()">Sigue leyendo</button>
 
@@ -64,7 +66,7 @@ const mensajes = [
   "Era increíblemente bella, pero también peligrosa.",
   "Tenía una mezcla rara: sensualidad, poder y misterio.",
   "Y ahora dime… ¿cómo se supone que uno no va a fijarse en alguien así?",
-  "Asique dime, cuando vengas… ¿podemos ir a cenar?"
+  "Así que dime, cuando vengas… ¿podemos ir a cenar?"
 ];
 
 let index = 0;
@@ -99,9 +101,21 @@ function cambiarTexto(){
   if(index < mensajes.length){
     escribirTexto(mensajes[index]);
 
-    if(index === mensajes.length - 1){
-      document.getElementById("imagen").style.display = "block";
+    // Ocultar ambas imágenes por defecto
+    document.getElementById("freyja").style.display = "none";
+    document.getElementById("pato").style.display = "none";
+
+    // Mostrar la foto de ella después de la frase 5
+    if(index === 4){
+      document.getElementById("freyja").style.display = "block";
     }
+
+    // Mostrar el pato en la frase final
+    if(index === 5){
+      document.getElementById("freyja").style.display = "none";
+      document.getElementById("pato").style.display = "block";
+    }
+
   }else{
     document.getElementById("btn").style.display = "none";
   }
@@ -112,3 +126,4 @@ escribirTexto(mensajes[index]);
 
 </body>
 </html>
+
