@@ -55,7 +55,7 @@ button:hover{
 
 <h1 id="mensaje"></h1>
 
-<img id="imagen" src="pato.png">
+<img id="imagen" src="pato.png" style="display:none;">
 
 <button id="btn" onclick="cambiarTexto()">Sigue leyendo</button>
 
@@ -72,6 +72,8 @@ const mensajes = [
 "Tenía una mezcla rara: sensualidad, poder y misterio.",
 
 "Y ahora dime… ¿cómo se supone que uno no va a fijarse en alguien así?"
+  
+"Asique dime, cuando vengas… ¿podemos ir a cenar?"
 
 ];
 
@@ -115,11 +117,15 @@ function cambiarTexto(){
 
   index++;
 
-  if(index < mensajes.length){
+ if(index < mensajes.length){
 
-    escribirTexto(mensajes[index]);
+  escribirTexto(mensajes[index]);
 
-  }else{
+  if(index === mensajes.length - 1){
+      document.getElementById("imagen").style.display = "block";
+  }
+
+ }else{
 
     document.getElementById("btn").style.display = "none";
 
@@ -133,3 +139,4 @@ escribirTexto(mensajes[index]);
 
 </body>
 </html>
+
