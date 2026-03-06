@@ -23,7 +23,6 @@ h1{
   white-space:pre-wrap;
   font-size:2rem;
   max-width:80%;
-  transition:opacity .5s ease;
 }
 
 img{
@@ -56,9 +55,9 @@ button:hover{
 
 <h1 id="mensaje"></h1>
 
-<img id="freyjaImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Freyja_by_James_Doyle_Penrose.jpg/512px-Freyja_by_James_Doyle_Penrose.jpg">
+<img id="imagen" src="pato.png">
 
-<button id="btn" onclick="cambiarTexto()">Sigue leyendo y no me dejes en visto (como siempre)</button>
+<button id="btn" onclick="cambiarTexto()">Sigue leyendo</button>
 
 <script>
 
@@ -73,12 +72,13 @@ const mensajes = [
 "Tenía una mezcla rara: sensualidad, poder y misterio.",
 
 "Y ahora dime… ¿cómo se supone que uno no va a fijarse en alguien así?"
+
 ];
 
 let index = 0;
 let escribiendo = false;
 
-function escribirTexto(texto, callback){
+function escribirTexto(texto){
 
   let i = 0;
   const velocidad = 40;
@@ -93,7 +93,6 @@ function escribirTexto(texto, callback){
     if(i < texto.length){
 
       elemento.textContent += texto[i];
-
       i++;
 
       setTimeout(escribir, velocidad);
@@ -101,8 +100,6 @@ function escribirTexto(texto, callback){
     }else{
 
       escribiendo = false;
-
-      if(callback) callback();
 
     }
 
@@ -124,41 +121,9 @@ function cambiarTexto(){
 
   }else{
 
-    iniciarCuentaAtras();
+    document.getElementById("btn").style.display = "none";
 
   }
-
-}
-
-function iniciarCuentaAtras(){
-
-  const elemento = document.getElementById("mensaje");
-
-  let contador = 3;
-
-  function cuenta(){
-
-    if(contador > 0){
-
-      elemento.textContent = contador + "...";
-
-      contador--;
-
-      setTimeout(cuenta, 800);
-
-    }else{
-
-      escribirTexto("Vale… ahora dime que no te he sacado una sonrisa 😌");
-
-      document.getElementById("btn").textContent = "Fin 😌";
-      document.getElementById("btn").disabled = true;
-      document.getElementById("btn").style.opacity = "0.7";
-
-    }
-
-  }
-
-  cuenta();
 
 }
 
